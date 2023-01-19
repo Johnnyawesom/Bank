@@ -15,7 +15,15 @@ namespace Bank_1
     {
         int id;
         string name;
-        List<IAccount> accountList = new List<Iaccount>
+        List<IAccount> accountList = new List<IAccount>();
+
+        public Bank(string _bankName)
+        {
+            this.id = IBank._bankcounter++; ;
+            this.name = _bankName;
+        
+        }
+
     }
         
 

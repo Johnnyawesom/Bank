@@ -1,0 +1,2 @@
+23-01-2023 00:26:38 - Log: Created account: ID 1 - Account name: 123 - Account type: checkingAccount
+23-01-2023 00:26:58 - Log: Account: ID 1 - Account name: 123 - Balance changed from: 0 => 10000

@@ -1,5 +1,4 @@
-﻿using bank_1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +8,7 @@ namespace Bank_1
 {
     interface IBank
     {
-        public static int _bankcounter = 1;
+        public static int _bankCounter = 1;
     }
 
     class Bank : IBank
@@ -21,66 +20,67 @@ namespace Bank_1
         // Constructor
         public Bank(string _bankName)
         {
-            this.id = IBank._bankcounter++; ;
+            this.id = IBank._bankCounter++; ;
             this.name = _bankName;
-
         }
 
         // Properties
         public string Name
         {
-            get { return this.id; }
-            get { this.name = value; }
+            get { return this.name; }
+            set { this.name = value; }
         }
-        public int ID { get { return this.id } }
+        public int ID { get { return this.id; } }
+        public List<IAccount> Accounts { get { return this.accountList; } }
 
-        //Methodes
+        // Methodes
         public IAccount CreateAccount(string name, AccountType accountType)
         {
             IAccount newAccount;
             switch (accountType)
             {
-                case AccountType.CheckingAccount(name);
+                case AccountType.checkingAccount:
+                    newAccount = new CheckingAccount(name);
                     this.accountList.Add(newAccount);
                     return newAccount;
                 case AccountType.savingsAccount:
+                    newAccount = new SavingsAccount(name);
                     this.accountList.Add(newAccount);
                     return newAccount;
                 case AccountType.consumerAccount:
+                    newAccount = new ConsumerAccount(name);
                     this.accountList.Add(newAccount);
                     return newAccount;
-                default
+                default:
                     return null;
             }
         }
 
-    }
-
-    public int AddInterests()
-    {
-        foreach (IAccount account in accountList)
+        public int AddInterests()
         {
-            account.AddInterests();
+            foreach (IAccount account in accountList)
+            {
+                account.AddInterests();
+            }
+            return accountList.Count;
         }
-        return accountList.Count;
-    }
 
-    //TODO: Implement Checks when withdrawing
-    public bool Withdraw(int _accountID, double _amount)
-    {
-        if (_amount <= accountList[_accountID].Balance)
+        // TODO: Implement checks when withdrawing
+        public bool Withdraw(int _accountID, double _amount)
         {
-            accountList[_accountID].Balance = _amount * -1;
-            return true;
+            if (_amount <= accountList[_accountID].Balance)
+            {
+                accountList[_accountID].Balance = _amount * -1;
+                return true;
+            }
+            else
+                return false;
+
         }
-        else
-            return false;
-    }
-
-    // TODO: Implement Checks when deposetting
-
-    public void Deposit(int _accountID, double _amount)
-    {
-        accountList[_accountID].Balance = _amount;
+        // TODO: Implement checks when deposeting
+        public void Deposit(int _accountID, double _amount)
+        {
+            accountList[_accountID].Balance = _amount;
+        }
     }
 }

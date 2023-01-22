@@ -27,7 +27,8 @@ namespace Bank_1
         }
 
         // Properties
-        public string Name {
+        public string Name
+        {
             get { return this.id; }
             get { this.name = value; }
         }
@@ -59,12 +60,27 @@ namespace Bank_1
     {
         foreach (IAccount account in accountList)
         {
-         account.AddInterests();
+            account.AddInterests();
         }
         return accountList.Count;
     }
 
-    //TODO: Implement Checks when deposet
-    public bool Withdraw 
+    //TODO: Implement Checks when withdrawing
+    public bool Withdraw(int _accountID, double _amount)
+    {
+        if (_amount <= accountList[_accountID].Balance)
+        {
+            accountList[_accountID].Balance = _amount * -1;
+            return true;
+        }
+        else
+            return false;
+    }
 
+    // TODO: Implement Checks when deposetting
+
+    public void Deposit(int _accountID, double _amount)
+    {
+        accountList[_accountID].Balance = _amount;
+    }
 }

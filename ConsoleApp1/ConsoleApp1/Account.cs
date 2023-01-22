@@ -21,7 +21,7 @@ namespace bank_1
     {
         public int ID { get; }
 
-        public AccountType GetType { get;}
+        public AccountType GetType { get; }
 
         public string Name { get; set; }
 
